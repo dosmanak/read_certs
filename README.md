@@ -1,6 +1,15 @@
 # read_certs
 AWK script to print x509 cert and rsa key info
 
+## Installation
+`openssl` and `awk` are required to run the script. Download the script and make it executable.
+Add the path to the script to your `PATH` environment variable. For example edit your `.bashrc`
+file and add the following line:
+```bash
+export PATH=$PATH:/path/to/read_certs
+```
+Then run `source ~/.bashrc` to apply the changes.
+
 ## Usage
 ```bash
 read_certs.sh <certfile|->
