@@ -12,7 +12,8 @@ Then run `source ~/.bashrc` to apply the changes.
 
 ## Usage
 ```bash
-read_certs.sh <certfile|->
+read_certs.awk <certfile>
+cat certs.pem | read_certs.awk
 ```
 The scripts reads the file that contains list of PEM certificates or RSA keys and prints out
 the information in a human readable format. It also prints out the modulus of the RSA key with
@@ -25,4 +26,4 @@ file.
 The script used to be shared among coworkers unofficially but created a legacy I brought
 to my new job.
 
-I added a RSA key info support.
+I added a RSA key info support with part of modulus to pair cert and key.

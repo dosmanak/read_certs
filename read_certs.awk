@@ -1,11 +1,6 @@
 #!/usr/bin/awk -f
 
 BEGIN {
-  if ( ARGC < 2 ) {
-    print "Usage ./read_certs <filename>"
-    exit
-  }
-
   cert_idx=0;
   command="openssl x509 -text -noout -certopt no_version,no_signame,no_sigdump,no_pubkey -modulus|sed -e 's/^\\(Modulus=.\\{38\\}\\).*\\(.\\{38\\}$\\)/\\1(...)\\2/'"
   rsa_command="openssl rsa -text -noout -modulus| sed -e 's/^\\(Modulus=.\\{38\\}\\).*\\(.\\{38\\}$\\)/\\1(...)\\2/'| grep -e Private -e Modulus"
@@ -18,7 +13,7 @@ BEGIN {
   cert_idx++
 }
 
-/-----BEGIN PRIVATE KEY-----/ {
+/-----BEGIN (RSA )?PRIVATE KEY-----/ {
   cert_data=""
   cert_idx++
 }
@@ -41,7 +36,7 @@ BEGIN {
   print "----------------------------------"
 }
 
-/-----END PRIVATE KEY-----/ {
+/-----END (RSA )?PRIVATE KEY-----/ {
   print "Private Key #"cert_idx;
   print "----------------------------------"
   print cert_data | rsa_command
